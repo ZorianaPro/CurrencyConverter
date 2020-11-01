@@ -11,9 +11,9 @@ const historyContainer = document.querySelector('.CurrencyConverter-History');
 const cleanButton = document.querySelector('.CurrencyConverter-Clean');
 const outputContainer = document.querySelector('input[name=output]');
 
-const displayConversionHistory = (conversionsHistory) => {
+const displayConversionHistory = () => {
   historyContainer.innerHTML = '';
-  conversionsHistory = conversionsHistory || JSON.parse(localStorage.getItem('conversionsHistory'));
+  const conversionsHistory = JSON.parse(localStorage.getItem('conversionsHistory'));
   (conversionsHistory || []).map((conversion) => {
     const date = new Date(conversion.timeStamp);
     const newElement = document.createElement('div');
@@ -69,19 +69,21 @@ const get = ({
       }
     })
     .then((response) => {
+      //display output to user
       outputContainer.value = response.data.result;
-      updateState({
+      //update localStorage
+      updateLocalStorage({
         from: from,
         to: to,
         amount: amount,
         output: response.data.result
       });
     })
-    .catch( (error) =>  {
+    .catch((error) =>  {
       console.log(error);
     });
 
-const updateState = ({
+const updateLocalStorage = ({
   from,
   to,
   amount,
@@ -96,8 +98,8 @@ const updateState = ({
     output: output,
     timeStamp: timeStamp
   });
-  displayConversionHistory(currentState);
   localStorage.setItem('conversionsHistory', JSON.stringify(currentState));
+  displayConversionHistory();
 };
 
 const onChange = debounce(() => {
