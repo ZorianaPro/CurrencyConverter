@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="styles.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
+    <title>Stylight Currency Converter</title>
+  </head>
+    <body>
+      <div class="CurrencyConverter">
+        <div class="CurrencyConverter-Banner"></div>
+        <div class="CurrencyConverter-Container">
+          <h2>Stylight Currency Converter</h2>
+          <form
+              onsubmit="onSubmit();"
+              class="CurrencyConverter-Form"
+          >
+            <div class="CurrencyConverter-Form-Row">
+              <input
+                  type="number"
+                  name="amount"
+                  onkeyup="onChange();"
+                  placeholder="Amount..."
+                  autocomplete="off"
+                  step="0.01"
+              />
+              <select
+                  name="fromCurrency"
+                  id="fromCurrency"
+                  onchange="onChange();"
+              >
+                <option selected value="EUR">EUR</option>
+                <option value="USD">USD</option>
+                <option value="JPY">JPY</option>
+              </select>
+            </div>
+            <div class="CurrencyConverter-Form-Row">
+              <input
+                  type="number"
+                  name="output"
+                  placeholder="Result..."
+                  disabled
+                  readonly/>
+              <select
+                  name="toCurrency"
+                  id="toCurrency"
+                  onchange="onChange();"
+              >
+                <option selected value="EUR">EUR</option>
+                <option value="USD">USD</option>
+                <option value="JPY">JPY</option>
+              </select>
+            </div>
+            <button type="submit" style="display: none"></button>
+          </form>
+          <button
+            class="CurrencyConverter-Clean"
+            onclick="cleanHistory()"
+          >
+            Clean History
+          </button>
+          <div class="CurrencyConverter-History"></div>
+        </div>
+      </div>
+      <!-- Use the `axios` library for making Ajax requests. -->
+      <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+      <!-- Put your own JavaScript into this file. -->
+      <script src="script.js"></script>
+    </body>
+</html>
